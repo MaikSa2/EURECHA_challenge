@@ -16,25 +16,12 @@ feed_composition = {
     'CarbonMonoxide': 15.8056,
 }
 
+# This Function interpolates permeability values based on the data provided.
 def interpolate_permeability(x, x_data, y_data):
-    """
-    Function to interpolate permeability values based on the data provided.
-    """
     return np.interp(x, x_data, y_data)
 
+# This Function calculates the permeability data for the given feed temperature, pressure and molar fraction of components
 def get_permeability_data(temp, pressure, mole_fraction):
-    """
-    Function to calculate the permeability data for given feed temperature,
-    feed pressure, and mole fractions of components.
-    
-    Parameters:
-    temp (int): Temperature in Celsius (100, 150, or 200).
-    pressure (float): Pressure in bars.
-    mole_fraction (dict): Mole fraction of components (keys: 'Hydrogen', 'CarbonDioxide', 'Methanol', 'Water', 'CarbonMonoxide').
-
-    Returns:
-    dict: Permeability data in SI units (mol/m^2/s/Pa).
-    """
     # Data for permeability in Barrer
     data = {
         100: {
@@ -97,24 +84,10 @@ def get_permeability_data(temp, pressure, mole_fraction):
 
     return permeability_data
 
+# Simulates the membrane module with simplafied driving force calculations using the partial pressure difference
 def simulate_membrane_module_partial_pressure_debug(
     feed_composition, feed_pressure, feed_temperature, permeability, membrane_area, stage_cut, membrane_thickness
 ):
-    """
-    Simulates a membrane module with simplified driving force calculations using partial pressure.
-
-    Parameters:
-    - feed_composition: dict of component molar flow rates in kmol/hr.
-    - feed_pressure: feed-side pressure in bar.
-    - feed_temperature: feed temperature in Celsius.
-    - permeability: dict of permeability values in SI units (m³(STP)/m²/s/Pa).
-    - membrane_area: membrane area in m².
-    - stage_cut: ratio of permeate flow to feed flow.
-    - membrane_thickness: thickness of the membrane in meters.
-
-    Returns:
-    - dict containing retentate and permeate flows, compositions, and pressures.
-    """
     # Constants
     n_points = 1000  # Number of discretized steps
     dx = 1 / n_points  # Step size for discretization
@@ -247,21 +220,8 @@ print(retentate_composition)
 print('perm comp')
 print(permeate_composition)
 
+# Performs RSM analysis using the provided function and design points
 def perform_rsm_analysis(feed_composition, feed_pressure, feed_temperature, permeability, design_points, function):
-    """
-    Perform RSM analysis using the provided function and design points.
-
-    Parameters:
-        feed_composition (dict): Feed composition (e.g., {'O2': 0.21, 'N2': 0.79}).
-        feed_pressure (float): Feed pressure in bar.
-        feed_temperature (float): Feed temperature in Kelvin.
-        permeability (dict): Permeabilities of gases (e.g., {'O2': 1.0, 'N2': 0.1}).
-        design_points (list of tuples): Design points [(membrane_area, stage_cut), ...].
-        function (callable): The simulation function.
-
-    Returns:
-        pd.DataFrame: DataFrame with design points and %recovery as the response.
-    """
     results = []
 
     for membrane_area, stage_cut in design_points:

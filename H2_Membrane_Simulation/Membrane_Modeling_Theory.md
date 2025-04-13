@@ -6,9 +6,9 @@ This document outlines the theory and methodology for modeling membrane separati
 ## Discretization and Permeability Calculation
 The membrane is discretized into multiple steps using the following equation:
 
-\[
+$$
 dx = \frac{1}{n_{\text{points}}}, \quad dL = \frac{\text{length}}{n_{\text{points}}}
-\]
+$$
 
 Since permeability varies with feed composition but remains nearly constant at a fixed temperature (as supported by literature), the mole fraction of each component is used to calculate its permeability in Barrer. A Python function updates permeability values at each iteration for accuracy.
 

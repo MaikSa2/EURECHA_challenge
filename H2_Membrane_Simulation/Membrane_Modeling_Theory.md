@@ -15,30 +15,30 @@ Since permeability varies with feed composition but remains nearly constant at a
 ## Fugacity and Permeation Rate
 The partial pressure and fugacity of each component are calculated using:
 
-\[
+$$
 f_{\text{feed}, i} = Z_{\text{feed}, i} \cdot P_{\text{feed}, i} \cdot 10^5
-\]
+$$
 
-\[
+$$
 f_{\text{perm}, i} = Z_{\text{perm}, i} \cdot P_{\text{perm}, i} \cdot 10^5
-\]
+$$
 
 The driving force for permeation is the fugacity difference across the membrane. The permeation flow rate for each component is computed as:
 
-\[
+$$
 F_{\text{perm}, i} = \frac{P_i}{l} \cdot \max(f_{\text{feed}, i} - f_{\text{perm}, i}, 0) \cdot A \cdot dx
-\]
+$$
 
 ## Total Flow Rates
 The total permeate and retentate flow rates are obtained by summing individual component flow rates:
 
-\[
+$$
 F_{\text{ret}} = F_{\text{ret}} - \sum_{i} F_{\text{perm}, i}
-\]
+$$
 
-\[
+$$
 F_{\text{perm}} = F_{\text{perm}} + \sum_{i} F_{\text{perm}, i}
-\]
+$$
 
 ## Integration with Aspen Simulations
 To avoid complexity, the Aspen model is not directly integrated into the Python simulation. Instead:
